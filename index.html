@@ -351,7 +351,7 @@
     <div class="grid-label animate-in delay-2">Apps</div>
     <div class="app-grid animate-in delay-3">
 
-      <div class="app-card" onclick="showDetail('note-bible')">
+      <div class="app-card" onclick="navigate('note-bible')">
         <div class="app-thumb"><img src="bible-note-screenshot.png" alt="Note Bible"></div>
         <div class="app-info">
           <div class="app-name">Note Bible</div>
@@ -359,7 +359,7 @@
         </div>
       </div>
 
-      <div class="app-card" onclick="showDetail('workout')">
+      <div class="app-card" onclick="navigate('workout')">
         <div class="app-thumb"><img src="workout-screenshot.png" alt="Workout"></div>
         <div class="app-info">
           <div class="app-name">Workout</div>
@@ -389,7 +389,7 @@
 <div id="note-bible" class="page">
 
   <div class="detail-nav">
-    <a href="#" class="back-link" onclick="showHome()">back</a>
+    <a href="#" class="back-link" onclick="navigate('')">back</a>
   </div>
 
   <div class="detail-hero">
@@ -466,7 +466,7 @@
 <div id="workout" class="page">
 
   <div class="detail-nav">
-    <a href="#" class="back-link" onclick="showHome()">back</a>
+    <a href="#" class="back-link" onclick="navigate('')">back</a>
   </div>
 
   <div class="detail-hero">
@@ -539,18 +539,21 @@
 </div>
 
 <script>
-function showDetail(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+function navigate(hash) {
+  window.location.hash = hash;
+}
+
+function route() {
+  var id = window.location.hash.slice(1) || 'home';
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  var el = document.getElementById(id);
+  if (el) el.classList.add('active');
+  else document.getElementById('home').classList.add('active');
   window.scrollTo(0, 0);
 }
 
-function showHome() {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('home').classList.add('active');
-  window.scrollTo(0, 0);
-  return false;
-}
+window.addEventListener('hashchange', route);
+window.addEventListener('DOMContentLoaded', route);
 </script>
 
 </body>
