@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apps that do one thing. Nothing else.</title>
+<meta name="description" content="No accounts. No social features. No growth hacks. Just the core job, done well.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0c0c;
+    --bg-card: rgba(255,255,255,0.03);
+    --bg-card-hover: rgba(255,255,255,0.06);
+    --text-1: #f0f0f0;
+    --text-2: #8a8a8a;
+    --text-3: #555;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --accent: #e8a851;
+    --accent-dim: rgba(232,168,81,0.12);
+    --radius: 12px;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', -apple-system, system-ui, sans-serif;
+    --max-w: 960px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text-1);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ========== L1: HERO ========== */
+  .hero {
+    max-width: var(--max-w); margin: 0 auto;
+    padding: 120px 32px 80px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(232,168,81,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-headline {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    max-width: 600px;
+    text-wrap: balance;
+  }
+  .hero-headline strong {
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 16px; color: var(--text-2);
+    margin-top: 20px; max-width: 420px;
+    line-height: 1.7;
+  }
+
+  /* ========== L1: APP GRID ========== */
+  .grid-section {
+    max-width: var(--max-w); margin: 0 auto;
+    padding: 0 32px 120px;
+  }
+  .grid-label {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-3); letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .app-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 720px;
+  }
+
+  .app-card {
+    cursor: pointer;
+    transition: transform 0.35s var(--ease);
+  }
+  .app-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .app-thumb {
+    width: 100%;
+    aspect-ratio: 9/16;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 11px; color: var(--text-3);
+    overflow: hidden;
+    border-radius: var(--radius);
+  }
+  .app-thumb img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+  }
+
+  .app-info {
+    padding: 16px 4px 0;
+  }
+  .app-name {
+    font-size: 16px; font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .app-job {
+    font-size: 13px; color: var(--text-2);
+    line-height: 1.5;
+  }
+
+  .app-card.placeholder {
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  /* ========== L2: DETAIL ========== */
+  .detail-nav {
+    max-width: var(--max-w); margin: 0 auto;
+    padding: 60px 32px 0;
+  }
+  .back-link {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--text-3); text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .back-link:hover { color: var(--text-1); }
+  .back-link::before { content: '←'; }
+
+  .detail-hero {
+    max-width: var(--max-w); margin: 0 auto;
+    padding: 48px 32px 0;
+  }
+  .detail-tag {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--accent); letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .detail-name {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+  .detail-job {
+    font-size: 17px; color: var(--text-2);
+    max-width: 480px; line-height: 1.7;
+  }
+
+  /* Media section */
+  .detail-body {
+    max-width: var(--max-w); margin: 0 auto;
+    padding: 48px 32px 120px;
+  }
+
+  .media-container {
+    margin-bottom: 64px;
+  }
+  .media-tabs {
+    display: flex; gap: 0; margin-bottom: 0;
+  }
+  .media-tab {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-3); padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .media-tab.active {
+    color: var(--text-2);
+    background: var(--bg-card);
+  }
+  .media-tab + .media-tab { border-left: none; }
+
+  .media-viewport {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 0 var(--radius) var(--radius) var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .media-viewport img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    background: var(--bg);
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 56px;
+  }
+  .section-label {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-3); letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-text {
+    font-size: 15px; color: var(--text-2);
+    line-height: 1.8; max-width: 560px;
+  }
+
+  /* Does / Doesn't grid */
+  .does-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .does-col h3 {
+    font-family: var(--mono); font-size: 11px;
+    font-weight: 500; color: var(--text-3);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .does-col ul {
+    list-style: none; padding: 0;
+  }
+  .does-col ul li {
+    font-size: 14px; color: var(--text-2);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .does-col.yes ul li::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .does-col.no ul li::before {
+    content: '';
+    width: 6px; height: 1px;
+    background: var(--text-3);
+    flex-shrink: 0;
+  }
+
+  /* GitHub CTA */
+  .source-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 13px;
+    color: var(--text-1); text-decoration: none;
+    padding: 12px 24px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.25s var(--ease);
+    letter-spacing: 0.02em;
+  }
+  .source-link:hover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+    color: var(--accent);
+  }
+  .source-link svg {
+    width: 16px; height: 16px; fill: currentColor;
+  }
+
+  /* ========== FOOTER ========== */
+  .site-footer {
+    max-width: var(--max-w); margin: 0 auto;
+    padding: 0 32px 48px;
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-text {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-3); letter-spacing: 0.04em;
+  }
+  .footer-link {
+    color: var(--text-3); text-decoration: none;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--text-2); }
+
+  /* ========== ANIMATIONS ========== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-in {
+    animation: fadeUp 0.6s var(--ease) both;
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 640px) {
+    .hero { padding: 80px 20px 60px; }
+    .grid-section { padding: 0 20px 80px; }
+    .app-grid { grid-template-columns: 1fr 1fr; gap: 24px; max-width: 100%; }
+    .detail-nav, .detail-hero, .detail-body { padding-left: 20px; padding-right: 20px; }
+    .does-grid { grid-template-columns: 1fr; }
+    .site-footer { padding-left: 20px; padding-right: 20px; flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== L1: STORE ========== -->
+<div id="home" class="page active">
+
+  <div class="hero">
+    <h1 class="hero-headline animate-in">
+      Apps that do <strong>one thing</strong>.<br>Nothing else.
+    </h1>
+    <p class="hero-sub animate-in delay-1">
+      No accounts. No social features. No growth hacks.<br>
+      Just the core job, done well.
+    </p>
+  </div>
+
+  <div class="grid-section">
+    <div class="grid-label animate-in delay-2">Apps</div>
+    <div class="app-grid animate-in delay-3">
+
+      <div class="app-card" onclick="showDetail('note-bible')">
+        <div class="app-thumb"><img src="bible-note-screenshot.png" alt="Note Bible"></div>
+        <div class="app-info">
+          <div class="app-name">Note Bible</div>
+          <div class="app-job">Read scripture. Have a thought. Write it down.</div>
+        </div>
+      </div>
+
+      <div class="app-card" onclick="showDetail('workout')">
+        <div class="app-thumb"><img src="workout-screenshot.png" alt="Workout"></div>
+        <div class="app-info">
+          <div class="app-name">Workout</div>
+          <div class="app-job">Start a set. Log it. Stay in the exercise.</div>
+        </div>
+      </div>
+
+      <div class="app-card placeholder">
+        <div class="app-thumb">coming soon</div>
+        <div class="app-info">
+          <div class="app-name">Next App</div>
+          <div class="app-job">One sentence. One job. That's it.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site-footer animate-in delay-4">
+    <span class="footer-text">© 2026</span>
+    <a href="https://github.com/kenehong" class="footer-link" target="_blank">github.com/kenehong</a>
+  </footer>
+
+</div>
+
+<!-- ========== L2: NOTE BIBLE ========== -->
+<div id="note-bible" class="page">
+
+  <div class="detail-nav">
+    <a href="#" class="back-link" onclick="showHome()">back</a>
+  </div>
+
+  <div class="detail-hero">
+    <div class="detail-tag animate-in">capture</div>
+    <h1 class="detail-name animate-in delay-1">Note Bible</h1>
+    <p class="detail-job animate-in delay-2">Read scripture. Have a thought. Write it down. Done.</p>
+  </div>
+
+  <div class="detail-body">
+
+    <div class="media-container animate-in delay-3">
+      <div class="media-tabs">
+        <div class="media-tab active">Screenshot</div>
+        <div class="media-tab">Video</div>
+      </div>
+      <div class="media-viewport">
+        <img src="bible-note-screenshot.png" alt="Note Bible Screenshot">
+      </div>
+    </div>
+
+    <div class="section animate-in delay-3">
+      <div class="section-label">Why this exists</div>
+      <p class="section-text">
+        Every Bible app adds study tools, cross-references, reading plans,
+        social sharing. None of them just let you write a note.
+        This app does one thing: captures your thought right after you read.
+        No account. No sync. No features.
+      </p>
+    </div>
+
+    <div class="section animate-in delay-3">
+      <div class="section-label">Scope</div>
+      <div class="does-grid">
+        <div class="does-col yes">
+          <h3>It does</h3>
+          <ul>
+            <li>Write a note</li>
+            <li>Attach to a verse</li>
+            <li>Search your notes</li>
+            <li>Work offline</li>
+          </ul>
+        </div>
+        <div class="does-col no">
+          <h3>It doesn't</h3>
+          <ul>
+            <li>Accounts</li>
+            <li>Social features</li>
+            <li>Reading plans</li>
+            <li>Study tools</li>
+            <li>Push notifications</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section animate-in delay-4">
+      <div class="section-label">Source</div>
+      <a href="https://github.com/kenehong/note-bible" class="source-link" target="_blank">
+        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-text">© 2026</span>
+    <a href="https://github.com/kenehong" class="footer-link" target="_blank">github.com/kenehong</a>
+  </footer>
+
+</div>
+
+<!-- ========== L2: WORKOUT ========== -->
+<div id="workout" class="page">
+
+  <div class="detail-nav">
+    <a href="#" class="back-link" onclick="showHome()">back</a>
+  </div>
+
+  <div class="detail-hero">
+    <div class="detail-tag animate-in">log</div>
+    <h1 class="detail-name animate-in delay-1">Workout</h1>
+    <p class="detail-job animate-in delay-2">Start a set. Log it. Stay in the exercise.</p>
+  </div>
+
+  <div class="detail-body">
+
+    <div class="media-container animate-in delay-3">
+      <div class="media-tabs">
+        <div class="media-tab active">Screenshot</div>
+        <div class="media-tab">Video</div>
+      </div>
+      <div class="media-viewport">
+        <img src="workout-screenshot.png" alt="Workout Screenshot">
+      </div>
+    </div>
+
+    <div class="section animate-in delay-3">
+      <div class="section-label">Why this exists</div>
+      <p class="section-text">
+        Workout apps want to be your coach, your social network, your meal planner.
+        This one just lets you log sets. Open it, tap the weight, tap the reps, done.
+        Your workout is the workout, not the app.
+      </p>
+    </div>
+
+    <div class="section animate-in delay-3">
+      <div class="section-label">Scope</div>
+      <div class="does-grid">
+        <div class="does-col yes">
+          <h3>It does</h3>
+          <ul>
+            <li>Log sets and reps</li>
+            <li>Track by muscle group</li>
+            <li>Calendar view</li>
+            <li>Work offline</li>
+          </ul>
+        </div>
+        <div class="does-col no">
+          <h3>It doesn't</h3>
+          <ul>
+            <li>Accounts</li>
+            <li>Social sharing</li>
+            <li>Meal tracking</li>
+            <li>Video guides</li>
+            <li>Push notifications</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section animate-in delay-4">
+      <div class="section-label">Source</div>
+      <a href="https://github.com/kenehong/workout" class="source-link" target="_blank">
+        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-text">© 2026</span>
+    <a href="https://github.com/kenehong" class="footer-link" target="_blank">github.com/kenehong</a>
+  </footer>
+
+</div>
+
+<script>
+function showDetail(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showHome() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('home').classList.add('active');
+  window.scrollTo(0, 0);
+  return false;
+}
+</script>
+
+</body>
+</html>
