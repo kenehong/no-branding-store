@@ -22,7 +22,7 @@
     --radius: 12px;
     --mono: 'JetBrains Mono', monospace;
     --sans: 'Inter', -apple-system, system-ui, sans-serif;
-    --max-w: 960px;
+    --max-w: 1200px;
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -90,9 +90,9 @@
 
   .app-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    max-width: 720px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 36px;
+    max-width: 100%;
   }
 
   .app-card {
@@ -329,7 +329,7 @@
   @media (max-width: 640px) {
     .hero { padding: 80px 20px 60px; }
     .grid-section { padding: 0 20px 80px; }
-    .app-grid { grid-template-columns: 1fr 1fr; gap: 24px; max-width: 100%; }
+    .app-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
     .detail-nav, .detail-hero, .detail-body { padding-left: 20px; padding-right: 20px; }
     .does-grid { grid-template-columns: 1fr; }
     .site-footer { padding-left: 20px; padding-right: 20px; flex-direction: column; gap: 8px; }
