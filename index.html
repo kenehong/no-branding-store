@@ -113,7 +113,7 @@
   }
   .app-thumb img {
     width: 100%; height: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .app-info {
@@ -214,11 +214,17 @@
     position: relative;
     overflow: hidden;
   }
-  .media-viewport img {
+  .media-viewport img,
+  .media-viewport video {
     width: 100%; height: 100%;
     object-fit: cover;
     background: var(--bg);
   }
+  .media-viewport video {
+    object-fit: contain;
+  }
+  .media-content { display: none; width: 100%; height: 100%; }
+  .media-content.active { display: block; }
 
   /* Sections */
   .section {
@@ -387,6 +393,14 @@
         </div>
       </div>
 
+      <div class="app-card" onclick="navigate('headsup')">
+        <div class="app-thumb"><img src="headsup-screenshot.png" alt="Headsup"></div>
+        <div class="app-info">
+          <div class="app-name">Headsup</div>
+          <div class="app-job">Find the blind spots before your trip does.</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -459,7 +473,8 @@
 
     <div class="section animate-in delay-4">
       <div class="section-label">Source</div>
-      <a href="https://github.com/kenehong/note-bible" class="source-link" target="_blank">
+      <a href="https://kenehong.github.io/note-bible/" class="source-link" target="_blank">→ Open App</a>
+      <a href="https://github.com/kenehong/note-bible" class="source-link" target="_blank" style="margin-left:12px;">
         <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         View on GitHub
       </a>
@@ -535,7 +550,8 @@
 
     <div class="section animate-in delay-4">
       <div class="section-label">Source</div>
-      <a href="https://github.com/kenehong/workout-tracker" class="source-link" target="_blank">
+      <a href="https://kenehong.github.io/workout-tracker/" class="source-link" target="_blank">→ Open App</a>
+      <a href="https://github.com/kenehong/workout-tracker" class="source-link" target="_blank" style="margin-left:12px;">
         <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         View on GitHub
       </a>
@@ -612,12 +628,10 @@
 
     <div class="section animate-in delay-4">
       <div class="section-label">Source</div>
-      <a href="https://github.com/kenehong/item-tracker" class="source-link" target="_blank">
+      <a href="https://kenehong.github.io/item-tracker/" class="source-link" target="_blank">→ Open App</a>
+      <a href="https://github.com/kenehong/item-tracker" class="source-link" target="_blank" style="margin-left:12px;">
         <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         View on GitHub
-      </a>
-      <a href="https://kenehong.github.io/item-tracker/" class="source-link" target="_blank" style="margin-left:12px;">
-        → Open App
       </a>
     </div>
 
@@ -693,7 +707,8 @@
 
     <div class="section animate-in delay-4">
       <div class="section-label">Source</div>
-      <a href="https://github.com/kenehong/weather-outfit" class="source-link" target="_blank">
+      <a href="https://kenehong.github.io/weather-outfit/" class="source-link" target="_blank">→ Open Demo</a>
+      <a href="https://github.com/kenehong/weather-outfit" class="source-link" target="_blank" style="margin-left:12px;">
         <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         View on GitHub
       </a>
@@ -708,7 +723,87 @@
 
 </div>
 
+<!-- ========== L2: HEADSUP ========== -->
+<div id="headsup" class="page">
+
+  <div class="detail-nav">
+    <a href="#" class="back-link" onclick="navigate('')">back</a>
+  </div>
+
+  <div class="detail-hero">
+    <div class="detail-tag animate-in">prepare</div>
+    <h1 class="detail-name animate-in delay-1">Headsup</h1>
+    <p class="detail-job animate-in delay-2">What you don't know can ruin your trip. We find the blind spots so you don't have to.</p>
+  </div>
+
+  <div class="detail-body">
+
+    <div class="media-container animate-in delay-3">
+      <div class="media-tabs">
+        <div class="media-tab active">Video</div>
+      </div>
+      <div class="media-viewport">
+        <video src="headsup.mp4" controls playsinline></video>
+      </div>
+    </div>
+
+    <div class="section animate-in delay-3">
+      <div class="section-label">Why this exists</div>
+      <p class="section-text">
+        You booked the flight. You picked the hotel. But nobody told you there's
+        no cell service in the national park, or that a wildfire closed the road
+        you planned to drive. Travel apps help you book — none of them tell you
+        what you don't know to search for. Headsup finds those blind spots
+        before your trip does.
+      </p>
+    </div>
+
+    <div class="section animate-in delay-3">
+      <div class="section-label">Scope</div>
+      <div class="does-grid">
+        <div class="does-col yes">
+          <h3>It does</h3>
+          <ul>
+            <li>Multi-leg trip builder</li>
+            <li>Must-know alerts (wildfires, closures)</li>
+            <li>Road conditions and route info</li>
+            <li>What to bring (visa, adapter, gear)</li>
+            <li>Safety map by neighborhood</li>
+            <li>Local transport recommendations</li>
+            <li>Weather with daily breakdown</li>
+          </ul>
+        </div>
+        <div class="does-col no">
+          <h3>It doesn't</h3>
+          <ul>
+            <li>Book flights or hotels</li>
+            <li>Accounts</li>
+            <li>Itinerary planning</li>
+            <li>Social features</li>
+            <li>Price comparison</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-text">&copy; 2026</span>
+    <a href="https://github.com/kenehong" class="footer-link" target="_blank">github.com/kenehong</a>
+  </footer>
+
+</div>
+
 <script>
+function switchMedia(tab, contentId) {
+  var container = tab.closest('.media-container');
+  container.querySelectorAll('.media-tab').forEach(function(t) { t.classList.remove('active'); });
+  container.querySelectorAll('.media-content').forEach(function(c) { c.classList.remove('active'); });
+  tab.classList.add('active');
+  document.getElementById(contentId).classList.add('active');
+}
+
 function navigate(hash) {
   window.location.hash = hash;
 }
