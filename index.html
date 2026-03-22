@@ -853,7 +853,12 @@ function navigate(hash) {
   window.location.hash = hash;
 }
 
+function stopAllVideos() {
+  document.querySelectorAll('video').forEach(function(v) { v.pause(); v.currentTime = 0; });
+}
+
 function route() {
+  stopAllVideos();
   var id = window.location.hash.slice(1) || 'home';
   document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
   var el = document.getElementById(id);
