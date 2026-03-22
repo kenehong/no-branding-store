@@ -9,16 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0c0c0c;
-    --bg-card: rgba(255,255,255,0.03);
-    --bg-card-hover: rgba(255,255,255,0.06);
-    --text-1: #f0f0f0;
-    --text-2: #8a8a8a;
-    --text-3: #555;
-    --border: rgba(255,255,255,0.07);
-    --border-hover: rgba(255,255,255,0.14);
-    --accent: #e8a851;
-    --accent-dim: rgba(232,168,81,0.12);
+    --bg: #fafafa;
+    --bg-card: rgba(0,0,0,0.02);
+    --bg-card-hover: rgba(0,0,0,0.05);
+    --text-1: #1a1a1a;
+    --text-2: #666;
+    --text-3: #999;
+    --border: rgba(0,0,0,0.08);
+    --border-hover: rgba(0,0,0,0.15);
+    --accent: #e06820;
+    --accent-dim: rgba(224,104,32,0.08);
     --radius: 12px;
     --mono: 'JetBrains Mono', monospace;
     --sans: 'Inter', -apple-system, system-ui, sans-serif;
@@ -49,7 +49,7 @@
     content: '';
     position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
     width: 480px; height: 480px;
-    background: radial-gradient(circle, rgba(232,168,81,0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(224,104,32,0.04) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-headline {
@@ -61,8 +61,11 @@
     text-wrap: balance;
   }
   .hero-headline strong {
+    font-family: var(--mono);
     font-weight: 500;
     color: var(--accent);
+    text-transform: lowercase;
+    letter-spacing: -0.04em;
   }
   .hero-sub {
     font-size: 16px; color: var(--text-2);
@@ -79,13 +82,21 @@
     max-width: var(--max-w); margin: 0 auto;
     padding: 0 32px 120px;
   }
-  .grid-label {
-    font-family: var(--mono); font-size: 11px;
-    color: var(--text-3); letter-spacing: 0.1em;
-    text-transform: uppercase;
+  .grid-header {
     margin-bottom: 32px;
-    padding-bottom: 16px;
+    padding-bottom: 24px;
     border-bottom: 1px solid var(--border);
+  }
+  .grid-title {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .grid-desc {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.6;
   }
 
   .app-grid {
@@ -218,10 +229,11 @@
   .media-viewport video {
     width: 100%; height: 100%;
     object-fit: cover;
-    background: var(--bg);
+    background: #f0f0f0;
   }
   .media-viewport video {
     object-fit: contain;
+    background: #1a1a1a;
   }
   .media-content { display: none; width: 100%; height: 100%; }
   .media-content.active { display: block; }
@@ -349,7 +361,7 @@
 
   <div class="hero">
     <h1 class="hero-headline animate-in">
-      Apps that do <strong>one thing</strong>.<br>Nothing else.
+      Apps that do <strong>one&thinsp;thing</strong>.<br>Nothing else.
     </h1>
     <p class="hero-sub animate-in delay-1">
       No accounts. No social features. No growth hacks.<br>
@@ -358,7 +370,10 @@
   </div>
 
   <div class="grid-section">
-    <div class="grid-label animate-in delay-2">Apps <span class="beta-notice">— PWAs in beta. All data lives in your browser — no server, no account. Clearing browser data will erase it.</span></div>
+    <div class="grid-header animate-in delay-2">
+      <div class="grid-title">In Testing</div>
+      <div class="grid-desc">Using these daily. If the need holds up, they'll go to the app store for real. You're welcome to try out and install via browser — just know that clearing browser data will erase your content.</div>
+    </div>
     <div class="app-grid animate-in delay-3">
 
       <div class="app-card" onclick="navigate('note-bible')">
@@ -385,6 +400,24 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <div class="grid-section">
+    <div class="grid-header animate-in delay-2">
+      <div class="grid-title">Demo</div>
+      <div class="grid-desc">Work in progress. These apps need API setup to fully work, so they're demo-only for now.</div>
+    </div>
+    <div class="app-grid animate-in delay-3">
+
+      <div class="app-card" onclick="navigate('headsup')">
+        <div class="app-thumb"><img src="headsup-screenshot.png" alt="Headsup"></div>
+        <div class="app-info">
+          <div class="app-name">Headsup</div>
+          <div class="app-job">Find the blind spots before your trip does.</div>
+        </div>
+      </div>
+
       <div class="app-card" onclick="navigate('weather-outfit')">
         <div class="app-thumb"><img src="weather-outfit-card.png" alt="Weather Outfit"></div>
         <div class="app-info">
@@ -393,11 +426,23 @@
         </div>
       </div>
 
-      <div class="app-card" onclick="navigate('headsup')">
-        <div class="app-thumb"><img src="headsup-screenshot.png" alt="Headsup"></div>
+    </div>
+  </div>
+
+  <div class="grid-section">
+    <div class="grid-header animate-in delay-2">
+      <div class="grid-title">In App Store</div>
+      <div class="grid-desc">Published apps available for download. Nothing here yet — first release is in the works.</div>
+    </div>
+    <div class="app-grid animate-in delay-3">
+
+      <div class="app-card placeholder" style="opacity: 0.6; pointer-events: none;">
+        <div class="app-thumb" style="background: var(--bg-card); border: 2px dashed var(--border-hover); display: flex; align-items: center; justify-content: center;">
+          <span style="font-family: var(--mono); font-size: 13px; color: var(--text-3); letter-spacing: 0.05em;">coming soon</span>
+        </div>
         <div class="app-info">
-          <div class="app-name">Headsup</div>
-          <div class="app-job">Find the blind spots before your trip does.</div>
+          <div class="app-name">TBD</div>
+          <div class="app-job">First app store release in the works.</div>
         </div>
       </div>
 
