@@ -80,12 +80,15 @@
   /* ========== L1: APP GRID ========== */
   .grid-section {
     max-width: var(--max-w); margin: 0 auto;
-    padding: 0 32px 120px;
+    padding: 0 32px 80px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .grid-section:last-of-type {
+    border-bottom: none;
   }
   .grid-header {
     margin-bottom: 32px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--border);
   }
   .grid-title {
     font-size: 20px;
