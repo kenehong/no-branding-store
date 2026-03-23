@@ -396,9 +396,22 @@
   }
   .carousel-track::-webkit-scrollbar { display: none; }
   .carousel-track img {
-    width: 85%; height: 100%; object-fit: cover; flex-shrink: 0;
+    width: 60%; height: 100%; object-fit: cover; flex-shrink: 0;
     scroll-snap-align: start; border-radius: var(--radius);
   }
+  .carousel-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.8); font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 2;
+    transition: background 0.2s;
+    backdrop-filter: blur(4px);
+  }
+  .carousel-nav:hover { background: rgba(0,0,0,0.7); }
+  .carousel-nav.prev { left: 8px; }
+  .carousel-nav.next { right: 8px; }
   .carousel-dots {
     display: flex; justify-content: center; gap: 6px; margin-top: 10px;
   }
@@ -903,11 +916,13 @@
   <div class="detail-body">
 
     <div class="animate-in delay-3">
-      <div class="carousel" id="woCarousel">
+      <div class="carousel" id="woCarousel" style="position:relative;">
+        <button class="carousel-nav prev" id="woPrev">&#8249;</button>
         <div class="carousel-track" id="woTrack">
           <img src="weather-outfit-1.png" alt="Weather Outfit App">
           <img src="weather-outfit-2.png" alt="Weather Outfit on Nest Hub">
         </div>
+        <button class="carousel-nav next" id="woNext">&#8250;</button>
       </div>
       <div class="carousel-dots" id="woDots">
         <button class="carousel-dot active"></button>
@@ -1103,6 +1118,18 @@ window.addEventListener('DOMContentLoaded', route);
       var imgs = track.querySelectorAll('img');
       if (imgs[i]) imgs[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
     });
+  });
+
+  var imgs = track.querySelectorAll('img');
+  document.getElementById('woPrev').addEventListener('click', function() {
+    var idx = Math.round(track.scrollLeft / (track.scrollWidth / imgs.length));
+    var prev = Math.max(0, idx - 1);
+    imgs[prev].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+  });
+  document.getElementById('woNext').addEventListener('click', function() {
+    var idx = Math.round(track.scrollLeft / (track.scrollWidth / imgs.length));
+    var next = Math.min(imgs.length - 1, idx + 1);
+    imgs[next].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
   });
 })();
 </script>
