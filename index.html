@@ -385,6 +385,15 @@
     color: var(--text-2); letter-spacing: 0.02em;
   }
 
+  /* Slideshow */
+  .wo-slideshow { position: relative; border-radius: var(--radius); }
+  .wo-slide {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: 0; transition: opacity 1s ease;
+  }
+  .wo-slide-active { opacity: 1; }
+
   /* ========== FOOTER ========== */
   .site-footer {
     max-width: var(--max-w); margin: 0 auto;
@@ -878,13 +887,9 @@
   <div class="detail-body">
 
     <div class="media-container animate-in delay-3">
-      <div class="media-tabs">
-        <div class="media-tab active" onclick="switchMedia(this, 'wo-slide-1')">App</div>
-        <div class="media-tab" onclick="switchMedia(this, 'wo-slide-2')">On Display</div>
-      </div>
-      <div class="media-viewport" style="position:relative;">
-        <img id="wo-slide-1" src="weather-outfit-1.png" alt="Weather Outfit App" class="media-content active">
-        <img id="wo-slide-2" src="weather-outfit-2.png" alt="Weather Outfit on Nest Hub" class="media-content">
+      <div class="media-viewport wo-slideshow">
+        <img src="weather-outfit-1.png" alt="Weather Outfit App" class="wo-slide wo-slide-active">
+        <img src="weather-outfit-2.png" alt="Weather Outfit on Nest Hub" class="wo-slide">
       </div>
     </div>
 
@@ -1059,6 +1064,18 @@ function route() {
 
 window.addEventListener('hashchange', route);
 window.addEventListener('DOMContentLoaded', route);
+
+// Weather Outfit auto slideshow
+(function() {
+  var slides = document.querySelectorAll('.wo-slide');
+  if (slides.length < 2) return;
+  var current = 0;
+  setInterval(function() {
+    slides[current].classList.remove('wo-slide-active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('wo-slide-active');
+  }, 4000);
+})();
 </script>
 
 </body>
