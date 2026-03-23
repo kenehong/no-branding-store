@@ -879,10 +879,12 @@
 
     <div class="media-container animate-in delay-3">
       <div class="media-tabs">
-        <div class="media-tab active">Screenshot</div>
+        <div class="media-tab active" onclick="switchMedia(this, 'wo-slide-1')">App</div>
+        <div class="media-tab" onclick="switchMedia(this, 'wo-slide-2')">On Display</div>
       </div>
-      <div class="media-viewport">
-        <img src="weather-outfit-screenshot.png" alt="Weather Outfit Screenshot">
+      <div class="media-viewport" style="position:relative;">
+        <img id="wo-slide-1" src="weather-outfit-1.png" alt="Weather Outfit App" class="media-content active">
+        <img id="wo-slide-2" src="weather-outfit-2.png" alt="Weather Outfit on Nest Hub" class="media-content">
       </div>
     </div>
 
