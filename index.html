@@ -216,27 +216,22 @@
 
   .media-viewport {
     width: 100%;
-    aspect-ratio: 16/10;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 0 var(--radius) var(--radius) var(--radius);
+    background: #000;
+    border: none;
+    border-radius: var(--radius);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
     position: relative;
     overflow: hidden;
+    padding: 24px 0;
   }
   .media-viewport img,
   .media-viewport video {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    background: #111;
-  }
-  .media-viewport video {
+    width: 100%;
+    max-height: 420px;
     object-fit: contain;
-    background: #1a1a1a;
+    background: transparent;
   }
   .media-content { display: none; width: 100%; height: 100%; }
   .media-content.active { display: block; }
@@ -423,6 +418,14 @@
   }
   .carousel-dot.active { opacity: 1; }
 
+  /* Carousel — mobile app screenshots (tall images) */
+  #wkCarousel .carousel-track {
+    height: 600px;
+  }
+  #wkCarousel .carousel-track img {
+    width: auto; height: 100%; object-fit: contain;
+  }
+
   /* ========== FOOTER ========== */
   .site-footer {
     max-width: var(--max-w); margin: 0 auto;
@@ -585,12 +588,8 @@
   <div class="detail-body">
 
     <div class="media-container animate-in delay-3">
-      <div class="media-tabs">
-        <div class="media-tab active">Screenshot</div>
-        <div class="media-tab">Video</div>
-      </div>
-      <div class="media-viewport">
-        <img src="bible-note-screenshot.png" alt="Note Bible Screenshot">
+      <div class="media-viewport" style="background:transparent;padding:0;">
+        <video src="notebible.mp4" autoplay loop muted playsinline style="max-height:600px;"></video>
       </div>
     </div>
 
@@ -694,13 +693,24 @@
 
   <div class="detail-body">
 
-    <div class="media-container animate-in delay-3">
-      <div class="media-tabs">
-        <div class="media-tab active">Screenshot</div>
-        <div class="media-tab">Video</div>
+    <div class="animate-in delay-3">
+      <div class="carousel" id="wkCarousel" style="position:relative;">
+        <button class="carousel-nav prev" id="wkPrev">&#8249;</button>
+        <div class="carousel-track" id="wkTrack">
+          <img src="workout-home.png" alt="Calendar Home">
+          <img src="workout-active.png" alt="Active Workout">
+          <img src="workout-setup.png" alt="Routine Setup">
+          <img src="workout-rest-timer.png" alt="Rest Timer">
+          <img src="workout-dropdown.png" alt="Workout Selector">
+        </div>
+        <button class="carousel-nav next" id="wkNext">&#8250;</button>
       </div>
-      <div class="media-viewport">
-        <img src="workout-screenshot.png" alt="Workout Screenshot">
+      <div class="carousel-dots" id="wkDots">
+        <button class="carousel-dot active"></button>
+        <button class="carousel-dot"></button>
+        <button class="carousel-dot"></button>
+        <button class="carousel-dot"></button>
+        <button class="carousel-dot"></button>
       </div>
     </div>
 
@@ -804,11 +814,8 @@
   <div class="detail-body">
 
     <div class="media-container animate-in delay-3">
-      <div class="media-tabs">
-        <div class="media-tab active">Screenshot</div>
-      </div>
-      <div class="media-viewport">
-        <img src="stuff-screenshot.png" alt="Stuff Screenshot">
+      <div class="media-viewport" style="background:transparent;padding:0;">
+        <img src="stuff-screenshot.png" alt="Stuff Screenshot" style="max-height:600px;">
       </div>
     </div>
 
@@ -1016,11 +1023,8 @@
   <div class="detail-body">
 
     <div class="media-container animate-in delay-3">
-      <div class="media-tabs">
-        <div class="media-tab active">Video</div>
-      </div>
-      <div class="media-viewport">
-        <video src="headsup.mp4" controls playsinline></video>
+      <div class="media-viewport" style="padding:0;">
+        <video src="headsup.mp4" controls playsinline style="max-height:none;object-fit:cover;"></video>
       </div>
     </div>
 
@@ -1063,6 +1067,26 @@
       </div>
     </div>
 
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;" class="animate-in delay-4">
+      <div class="section">
+        <div class="section-label">Source</div>
+        <span class="source-link">TBD</span>
+      </div>
+      <div class="section">
+        <div class="section-label">Contributors</div>
+        <div class="contributors">
+          <a href="https://github.com/kenehong" class="contributor" target="_blank">
+            <img class="contributor-avatar" src="https://github.com/kenehong.png?size=56" alt="kenehong">
+            <span class="contributor-name">kenehong</span>
+          </a>
+          <a href="https://github.com/JeyunKim" class="contributor" target="_blank">
+            <img class="contributor-avatar" src="https://github.com/JeyunKim.png?size=56" alt="JeyunKim">
+            <span class="contributor-name">JeyunKim</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <footer class="site-footer">
@@ -1097,10 +1121,45 @@ function route() {
   if (el) el.classList.add('active');
   else document.getElementById('home').classList.add('active');
   window.scrollTo(0, 0);
+  var active = document.querySelector('.page.active');
+  if (active) {
+    active.querySelectorAll('video[autoplay]').forEach(function(v) { v.play(); });
+  }
 }
 
 window.addEventListener('hashchange', route);
 window.addEventListener('DOMContentLoaded', route);
+
+// Workout carousel — scroll sync dots
+(function() {
+  var track = document.getElementById('wkTrack');
+  var dots = document.querySelectorAll('#wkDots .carousel-dot');
+  if (!track || dots.length < 2) return;
+
+  track.addEventListener('scroll', function() {
+    var idx = Math.round(track.scrollLeft / (track.scrollWidth / dots.length));
+    dots.forEach(function(d, j) { d.classList.toggle('active', j === idx); });
+  });
+
+  dots.forEach(function(dot, i) {
+    dot.addEventListener('click', function() {
+      var imgs = track.querySelectorAll('img');
+      if (imgs[i]) imgs[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    });
+  });
+
+  var imgs = track.querySelectorAll('img');
+  document.getElementById('wkPrev').addEventListener('click', function() {
+    var idx = Math.round(track.scrollLeft / (track.scrollWidth / imgs.length));
+    var prev = Math.max(0, idx - 1);
+    imgs[prev].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+  });
+  document.getElementById('wkNext').addEventListener('click', function() {
+    var idx = Math.round(track.scrollLeft / (track.scrollWidth / imgs.length));
+    var next = Math.min(imgs.length - 1, idx + 1);
+    imgs[next].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+  });
+})();
 
 // Weather Outfit carousel — scroll sync dots
 (function() {
