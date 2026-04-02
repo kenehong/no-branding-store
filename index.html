@@ -959,6 +959,8 @@
             <li>Weather effects (rain, snow, sun)</li>
             <li>3 sensory modes (Standard / Calm / Still)</li>
             <li>Location-based weather</li>
+            <li>Voice announcements (espeak TTS)</li>
+            <li>Raspberry Pi embedded display</li>
           </ul>
         </div>
         <div class="does-col no">
@@ -968,10 +970,44 @@
             <li>Hourly forecasts</li>
             <li>Weather alerts</li>
             <li>Multiple locations</li>
-            <li>Sound effects</li>
           </ul>
         </div>
       </div>
+    </div>
+
+    <div class="section animate-in delay-4">
+      <div class="section-label">Version History</div>
+      <ul class="version-list">
+        <li class="version-item" style="flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:flex-start;gap:16px;">
+            <div class="version-tag current">v2</div>
+            <div class="version-body">
+              <div class="version-date">04-02-26<span class="version-current">current</span></div>
+              <ul class="version-changes">
+                <li>Raspberry Pi + 7" LCD embedded kiosk display</li>
+                <li>Voice announcements via espeak TTS + external speakers</li>
+                <li>Sensory-aware speech (calm = slow & quiet, still = muted)</li>
+                <li>Local TTS server (Python) for offline operation</li>
+                <li>Hamburger menu for tablet/Pi form factor</li>
+              </ul>
+            </div>
+          </div>
+          <img src="weather-outfit-pi.jpg" alt="Weather Outfit v2 running on Raspberry Pi" style="width:100%;border-radius:8px;margin-top:4px;">
+        </li>
+        <li class="version-item">
+          <div class="version-tag">v1</div>
+          <div class="version-body">
+            <div class="version-date">03-22-26</div>
+            <ul class="version-changes">
+              <li>Pixel art characters by weather state (hot/cool/cold/rainy)</li>
+              <li>Walk animation + weather effects (rain, snow, wind)</li>
+              <li>3 sensory modes for ASD-friendly experience</li>
+              <li>Live weather via Open-Meteo API</li>
+              <li>GitHub Pages deployment</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;" class="animate-in delay-4">
