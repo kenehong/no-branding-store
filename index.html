@@ -487,6 +487,32 @@
 
   <div class="grid-section">
     <div class="grid-header animate-in delay-2">
+      <div class="grid-title">In App Store</div>
+      <div class="grid-desc">Published apps available for download on the Apple App Store.</div>
+    </div>
+    <div class="app-grid animate-in delay-3">
+
+      <div class="app-card" onclick="navigate('kids-daily-tasks')">
+        <div class="app-thumb"><img src="kids-task-dashboard.png" alt="Kids Daily Tasks"></div>
+        <div class="app-info">
+          <div class="app-name">Kids Daily Tasks</div>
+          <div class="app-job">Check off tasks. Earn coins. Build the streak.</div>
+        </div>
+      </div>
+
+      <div class="app-card" onclick="window.location.href='../item-tracker/landing.html'">
+        <div class="app-thumb"><img src="stuff-screenshot.png" alt="Stuffed In"></div>
+        <div class="app-info">
+          <div class="app-name">Stuffed In</div>
+          <div class="app-job">Put something away. Remember where it went.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="grid-section">
+    <div class="grid-header animate-in delay-2">
       <div class="grid-title">In Testing</div>
       <div class="grid-desc">Using these daily. If the need holds up, they'll go to the app store for real. You're welcome to try out and install via browser — just know that clearing browser data will erase your content.</div>
     </div>
@@ -505,14 +531,6 @@
         <div class="app-info">
           <div class="app-name">Workout</div>
           <div class="app-job">Start a set. Log it. Stay in the exercise.</div>
-        </div>
-      </div>
-
-      <div class="app-card" onclick="navigate('stuff')">
-        <div class="app-thumb"><img src="stuff-screenshot.png" alt="Stuff"></div>
-        <div class="app-info">
-          <div class="app-name">Stuff</div>
-          <div class="app-job">Put something away. Remember where it went.</div>
         </div>
       </div>
 
@@ -547,26 +565,6 @@
         <div class="app-info">
           <div class="app-name">Headsup</div>
           <div class="app-job">Find the blind spots before your trip does.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="grid-section">
-    <div class="grid-header animate-in delay-2">
-      <div class="grid-title">In App Store</div>
-      <div class="grid-desc">Published apps available for download. Nothing here yet — first release is in the works.</div>
-    </div>
-    <div class="app-grid animate-in delay-3">
-
-      <div class="app-card placeholder" style="opacity: 0.6; pointer-events: none;">
-        <div class="app-thumb" style="background: var(--bg-card); border: 2px dashed var(--border-hover); display: flex; align-items: center; justify-content: center;">
-          <span style="font-family: var(--mono); font-size: 13px; color: var(--text-3); letter-spacing: 0.05em;">coming soon</span>
-        </div>
-        <div class="app-info">
-          <div class="app-name">TBD</div>
-          <div class="app-job">First app store release in the works.</div>
         </div>
       </div>
 
@@ -1249,6 +1247,137 @@
 
 </div>
 
+<!-- ========== L2: KIDS DAILY TASKS ========== -->
+<div id="kids-daily-tasks" class="page">
+
+  <div class="detail-nav">
+    <a href="#" class="back-link" onclick="navigate('')">back</a>
+  </div>
+
+  <div class="detail-hero">
+    <div class="detail-tag animate-in">routine</div>
+    <h1 class="detail-name animate-in delay-1">Kids Daily Tasks</h1>
+    <p class="detail-job animate-in delay-2">Check off tasks. Earn coins. Build the streak.</p>
+  </div>
+
+  <div class="detail-body">
+
+    <div class="animate-in delay-3">
+      <div class="carousel" id="kdtCarousel" style="position:relative;height:500px;">
+        <button class="carousel-nav prev" id="kdtPrev">&#8249;</button>
+        <div class="carousel-track" id="kdtTrack" style="gap:4px;height:100%;">
+          <img src="kids-task-ipad-dashboard.png" alt="iPad Dashboard" style="width:auto;height:100%;object-fit:contain;">
+          <img src="kids-task-ipad-celebration.png" alt="iPad Celebration" style="width:auto;height:100%;object-fit:contain;">
+          <img src="kids-task-ipad-parent.png" alt="iPad Parent Tasks" style="width:auto;height:100%;object-fit:contain;">
+          <img src="kids-task-ipad-coins.png" alt="iPad Coins" style="width:auto;height:100%;object-fit:contain;">
+          <img src="kids-task-ipad-results.png" alt="iPad Real Results" style="width:auto;height:100%;object-fit:contain;">
+        </div>
+        <button class="carousel-nav next" id="kdtNext">&#8250;</button>
+      </div>
+      <div class="carousel-dots" id="kdtDots">
+        <button class="carousel-dot active"></button>
+        <button class="carousel-dot"></button>
+        <button class="carousel-dot"></button>
+        <button class="carousel-dot"></button>
+        <button class="carousel-dot"></button>
+      </div>
+    </div>
+
+    <div class="section animate-in delay-3">
+      <div class="section-label">Why this exists</div>
+      <p class="section-text">
+        Every chore app turns into a negotiation tool or a screen-time marketplace.
+        This one just shows today's tasks. Kids check them off, parents verify,
+        coins get awarded. No accounts, no gamification rabbit holes, no social.
+        Built for kids who need to brush teeth and make the bed — not manage a project.
+      </p>
+    </div>
+
+    <div class="section animate-in delay-3">
+      <div class="section-label">Scope</div>
+      <div class="does-grid">
+        <div class="does-col yes">
+          <h3>It does</h3>
+          <ul>
+            <li>Daily task checklist per kid</li>
+            <li>Coin rewards with parent verification</li>
+            <li>Streak tracking</li>
+            <li>Confetti celebration on completion</li>
+            <li>Day-of-week task scheduling</li>
+            <li>Individual PINs per kid + parent</li>
+            <li>Daily Bible verse</li>
+          </ul>
+        </div>
+        <div class="does-col no">
+          <h3>It doesn't</h3>
+          <ul>
+            <li>Accounts</li>
+            <li>Cloud sync</li>
+            <li>Screen time rewards</li>
+            <li>Social features</li>
+            <li>Push notifications</li>
+            <li>In-app purchases</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section animate-in delay-4">
+      <div class="section-label">Version History</div>
+      <ul class="version-list">
+        <li class="version-item">
+          <div class="version-tag current">v2</div>
+          <div class="version-body">
+            <div class="version-date">04-11-26<span class="version-current">current</span></div>
+            <ul class="version-changes">
+              <li>App Store release (iOS)</li>
+              <li>Onboarding carousel for first launch</li>
+              <li>Dynamic kid management (add/remove profiles)</li>
+              <li>Emoji picker for tasks</li>
+              <li>Parent streak edit and show/hide toggle</li>
+              <li>Capacitor native shell</li>
+            </ul>
+          </div>
+        </li>
+        <li class="version-item">
+          <div class="version-tag">v1</div>
+          <div class="version-body">
+            <div class="version-date">03-22-26</div>
+            <ul class="version-changes">
+              <li>Task checklist with coin system</li>
+              <li>Day-of-week toggles per task</li>
+              <li>Confetti celebration overlay</li>
+              <li>Daily Bible verse rotation</li>
+              <li>PWA with offline support</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section animate-in delay-4">
+      <div class="section-label">Download</div>
+      <div style="display:flex;align-items:center;gap:24px;">
+        <a href="https://apps.apple.com/us/app/kids-daily-tasks/id6761322932" class="source-link" target="_blank" style="display:inline-flex;align-items:center;gap:8px;">
+          <svg viewBox="0 0 384 512" width="16" height="16" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          App Store
+        </a>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <img src="kids-task-qr.png" alt="QR Code" style="width:100px;height:100px;border-radius:8px;">
+          <span style="font-family:var(--mono);font-size:10px;color:var(--text-3);letter-spacing:0.05em;">Scan to download</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">
+    <span class="footer-text">&copy; 2026</span>
+    <a href="https://github.com/kenehong" class="footer-link" target="_blank">github.com/kenehong</a>
+  </footer>
+
+</div>
+
 <script>
 function switchMedia(tab, contentId) {
   var container = tab.closest('.media-container');
@@ -1339,6 +1468,37 @@ window.addEventListener('DOMContentLoaded', route);
     imgs[prev].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
   });
   document.getElementById('woNext').addEventListener('click', function() {
+    var idx = Math.round(track.scrollLeft / (track.scrollWidth / imgs.length));
+    var next = Math.min(imgs.length - 1, idx + 1);
+    imgs[next].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+  });
+})();
+
+// Kids Daily Tasks carousel — scroll sync dots
+(function() {
+  var track = document.getElementById('kdtTrack');
+  var dots = document.querySelectorAll('#kdtDots .carousel-dot');
+  if (!track || dots.length < 2) return;
+
+  track.addEventListener('scroll', function() {
+    var idx = Math.round(track.scrollLeft / (track.scrollWidth / dots.length));
+    dots.forEach(function(d, j) { d.classList.toggle('active', j === idx); });
+  });
+
+  dots.forEach(function(dot, i) {
+    dot.addEventListener('click', function() {
+      var imgs = track.querySelectorAll('img');
+      if (imgs[i]) imgs[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    });
+  });
+
+  var imgs = track.querySelectorAll('img');
+  document.getElementById('kdtPrev').addEventListener('click', function() {
+    var idx = Math.round(track.scrollLeft / (track.scrollWidth / imgs.length));
+    var prev = Math.max(0, idx - 1);
+    imgs[prev].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+  });
+  document.getElementById('kdtNext').addEventListener('click', function() {
     var idx = Math.round(track.scrollLeft / (track.scrollWidth / imgs.length));
     var next = Math.min(imgs.length - 1, idx + 1);
     imgs[next].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
